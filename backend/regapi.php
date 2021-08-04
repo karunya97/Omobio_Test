@@ -6,7 +6,7 @@ $fullname = $_POST['fullname'];
 $username = $_POST['username'];
 $password = $_POST['password'];
 $email 	  = $_POST['email'];
-$mobile   = $_POST['mobile'];
+$cpassword   = $_POST['cpassword'];
 
 $error;
 if(empty($fullname))
@@ -25,18 +25,18 @@ else if(empty($email))
 {
 	$error = "email is required";
 }
-else if(empty($mobile))
+else if(empty($cpassword))
 {
-	$error = "mobile is required";
+	$error = "Confirm password is required";
 }
 else{
 	
-	$alreadyExistVal = mysqli_query($dbconn,"SELECT * FROM `users` WHERE `mobile` = $mobile");
+	$alreadyExistVal = mysqli_query($dbconn,"SELECT * FROM `users` WHERE `username` = $username");
 	if(mysqli_num_rows($alreadyExistVal) == 0)
 	{
 	
-	$insertQry = "INSERT INTO `users`(`fullname`, `username`, `password`, `email`, `mobile`) 
-	VALUES ('$fullname','$username','$password','$email','$mobile')";
+	$insertQry = "INSERT INTO `users`(`name`, `username`, `password`, `email`, `cpassword`) 
+	VALUES ('$fullname','$username','$password','$email','$cpassword')";
 	
 	$qry = mysqli_query($dbconn, $insertQry);
 	
